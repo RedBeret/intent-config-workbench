@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Render via PowerShell wrapper
+        shell: pwsh
+        run: ./scripts/Render-All.ps1 -Bootstrap
+
+      - name: Run validation and tests via PowerShell wrapper
+        shell: pwsh
+        run: ./scripts/Test-Intent.ps1

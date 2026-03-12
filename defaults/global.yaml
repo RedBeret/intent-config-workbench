@@ -1,0 +1,12 @@
+domain_name: lab.example.invalid
+banner: |
+  Authorized synthetic training environment only.
+  No production traffic. No customer data.
+ntp_servers:
+  - 192.0.2.123
+dns_servers:
+  - 192.0.2.53
+render_timeout_seconds: 5
+retry_attempts: 3
+retry_backoff_seconds: 0.2
+database_path: .workbench/workbench.db

@@ -1,0 +1,41 @@
+hostname: edge-02
+interfaces:
+  - name: Ethernet1
+    description: uplink-to-dist-01
+    enabled: true
+    mode: trunk
+    native_vlan: 10
+    allowed_vlans: [10, 20, 30, 40]
+  - name: Ethernet2
+    description: user-segment-b-refresh
+    enabled: true
+    mode: access
+    access_vlan: 20
+  - name: Ethernet3
+    description: voice-segment-b
+    enabled: true
+    mode: access
+    access_vlan: 30
+  - name: Ethernet4
+    description: lab-camera-segment
+    enabled: true
+    mode: access
+    access_vlan: 40
+vlans:
+  - id: 10
+    name: MGMT
+  - id: 20
+    name: USERS_B
+  - id: 30
+    name: VOICE
+  - id: 40
+    name: CAMERA
+routing:
+  router_id: 192.0.2.22
+  static_routes:
+    - prefix: 203.0.113.0/24
+      next_hop: 192.0.2.1
+      description: synthetic-default-exit
+    - prefix: 198.51.100.128/25
+      next_hop: 192.0.2.1
+      description: synthetic-camera-service

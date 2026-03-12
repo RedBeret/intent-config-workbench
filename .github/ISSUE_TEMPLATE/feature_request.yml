@@ -1,0 +1,35 @@
+name: Feature request
+description: Suggest an improvement to the synthetic training repo.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What is missing or awkward today?
+      placeholder: The diff summary is useful, but it would be easier to review if...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the change you would like to see.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Note any Windows-first, synthetic-only, or local-only constraints that matter.
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Project fit
+      options:
+        - label: This request keeps the repo local-only and synthetic-only.
+          required: true
+        - label: This request does not depend on real device access or real credentials.
+          required: true

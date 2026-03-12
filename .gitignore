@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+.workbench/workbench.db
+.workbench/*.json
+artifacts/*.json
+artifacts/*.patch
+artifacts/candidate/
+rendered/*.cfg
+rendered/*.json

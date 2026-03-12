@@ -1,0 +1,34 @@
+devices:
+  - hostname: dist-01
+    serial: SYN-DIST-0001
+    role: distribution
+    platform: synthetic-nos
+    location: lab-a
+    mgmt:
+      interface_name: Mgmt0
+      ipv4: 192.0.2.11/24
+      gateway: 192.0.2.1
+      dns_servers:
+        - 192.0.2.53
+  - hostname: edge-01
+    serial: SYN-EDGE-0001
+    role: access
+    platform: synthetic-nos
+    location: lab-a
+    mgmt:
+      interface_name: Mgmt0
+      ipv4: 192.0.2.21/24
+      gateway: 192.0.2.1
+      dns_servers:
+        - 192.0.2.53
+  - hostname: edge-02
+    serial: SYN-EDGE-0002
+    role: access
+    platform: synthetic-nos
+    location: lab-b
+    mgmt:
+      interface_name: Mgmt0
+      ipv4: 192.0.2.22/24
+      gateway: 192.0.2.1
+      dns_servers:
+        - 192.0.2.53

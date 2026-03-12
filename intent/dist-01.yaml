@@ -1,0 +1,41 @@
+hostname: dist-01
+users:
+  - username: audit_lab
+    role: read-only
+    secret_token: SYNTHETIC-AUDIT-LAB
+    ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIST0001 audit_lab@lab.example.invalid
+  - username: ops_lab
+    role: netops
+    secret_token: SYNTHETIC-OPS-LAB
+    ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIST0002 ops_lab@lab.example.invalid
+interfaces:
+  - name: Ethernet1
+    description: uplink-to-edge-01
+    enabled: true
+    mode: trunk
+    native_vlan: 10
+    allowed_vlans: [10, 20, 30]
+  - name: Ethernet2
+    description: uplink-to-edge-02
+    enabled: true
+    mode: trunk
+    native_vlan: 10
+    allowed_vlans: [10, 20, 30]
+  - name: Ethernet48
+    description: lab-core-uplink
+    enabled: true
+    mode: routed
+    ipv4_address: 198.51.100.2/30
+vlans:
+  - id: 10
+    name: MGMT
+  - id: 20
+    name: USERS_A
+  - id: 30
+    name: VOICE
+routing:
+  router_id: 192.0.2.11
+  static_routes:
+    - prefix: 203.0.113.0/24
+      next_hop: 198.51.100.1
+      description: synthetic-upstream

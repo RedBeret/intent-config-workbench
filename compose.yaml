@@ -1,0 +1,11 @@
+services:
+  tooling:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    environment:
+      PYTHONUNBUFFERED: "1"
+    command: ["python", "-m", "intent_config_workbench.cli", "health", "--workspace", "/workspace"]

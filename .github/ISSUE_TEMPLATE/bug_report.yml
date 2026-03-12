@@ -1,0 +1,64 @@
+name: Bug report
+description: Report a problem with validation, rendering, diffing, docs, or scripts.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug.
+
+        Please keep all examples synthetic. Do not paste real credentials, real hostnames, or customer data.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Short description of the problem.
+      placeholder: Rendering edge-02 fails after adding a VLAN
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Where did this happen?
+      options:
+        - Windows PowerShell
+        - WSL2 Ubuntu
+        - Docker
+        - GitHub Actions
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: Paste the command you ran.
+      placeholder: pwsh -File .\scripts\Render-All.ps1 -Bootstrap -Demo
+      render: powershell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Relevant output
+      description: Paste synthetic logs, validation output, or diff snippets if helpful.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I confirmed the report does not include real credentials, real hostnames, or customer data.
+          required: true
