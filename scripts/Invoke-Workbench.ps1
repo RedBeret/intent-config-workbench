@@ -42,7 +42,7 @@ function Invoke-PreferredPython {
 
     $py = Get-Command py -ErrorAction SilentlyContinue
     if ($null -ne $py) {
-        Invoke-Native -FilePath $py.Source -Arguments @("-3.12") + $Arguments
+        Invoke-Native -FilePath $py.Source -Arguments (@("-3.12") + $Arguments)
         return
     }
 
