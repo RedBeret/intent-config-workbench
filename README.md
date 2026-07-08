@@ -144,6 +144,38 @@ Candidate diff from the demo overlay:
 + switchport access vlan 40
 ```
 
+## Case Study: Reviewing a Candidate Change Across Three Synthetic Devices
+
+**Situation.** A lab operator has three synthetic devices in the workbench: `edge-01`, `edge-02`, and `dist-01`. The task is to add a new camera-segment interface to `edge-02` and review the full candidate diff across all three devices before handing off to transport automation.
+
+**Constraints.** No real devices — everything runs locally on Windows. The change must not silently affect `edge-01` or `dist-01`. Output must be deterministic so two runs of the same intent produce identical artifacts.
+
+**What the operator does.**
+
+1. Adds the new interface block to `demo/intent/edge-02.yaml` (the overlay, not the base intent).
+2. Runs the one-command demo path:
+   ```powershell
+   pwsh -File .\scripts\Render-All.ps1 -Bootstrap -Demo
+   ```
+3. Reviews `artifacts/diff-summary.json` and `artifacts/demo.patch`.
+
+**What the diff shows.**
+
+```diff
++interface Ethernet4
++ description lab-camera-segment
++ switchport mode access
++ switchport access vlan 40
+```
+
+Only `edge-02` appears in the diff. `edge-01` and `dist-01` are unchanged — confirmed by the diff engine comparing rendered artifacts against the previous snapshot. The candidate is clean: one device, one interface, no collateral changes.
+
+**What the operator hands off.** The patch file and diff summary go to the transport step. The handoff is a file, not a conversation. The next step picks up exactly what the diff shows — no interpretation required.
+
+**What it proves.** The workbench enforces the review step. It is not possible to generate a candidate diff without first validating intent and producing a deterministic render. The diff is a first-class artifact, not an afterthought.
+
+All hostnames, IPs, serials, and credentials in this example are synthetic. See `README.md` for the full list of synthetic conventions.
+
 ## Architecture
 
 ```mermaid
